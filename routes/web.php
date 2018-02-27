@@ -11,6 +11,13 @@
 |
 */
 
+use Ixudra\Curl\Facades\Curl;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function() {
+    $response = Curl::to('http://www.google.com.tw')->get();
+    return $response;
 });

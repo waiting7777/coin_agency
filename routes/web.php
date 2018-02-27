@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::get('/test', function() {
     $response = Curl::to('http://www.google.com.tw')->get();
-    Log::emergency('ttteesst');
+    $user = ['name' => 'John', 'age' => 65];
+    Log::channel('slack')->info('User: ' . print_r($user, true));
     return $response;
 });

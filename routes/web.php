@@ -19,5 +19,6 @@ Route::get('/', function () {
 
 Route::get('/test', function() {
     $response = Curl::to('http://www.google.com.tw')->get();
+    Log::emergency('ttteesst');
     return $response;
 });

@@ -48,7 +48,7 @@ Route::post('/webhook', function(Request $request){
                         ),
                         array(
                             'title' => 'Price',
-                            'value' => '$' . $coin['price_usd'],
+                            'value' => '$' . number_format($coin['price_usd'], 2),
                             'short'=> true
                         ),
                         array(
@@ -73,7 +73,7 @@ Route::post('/webhook', function(Request $request){
                         ),
                         array(
                             'title' => 'Market Cap',
-                            'value' => '$' . $coin['market_cap_usd'],
+                            'value' => '$' . number_format($coin['market_cap_usd']),
                             'short'=> true
                         ),
                         array(

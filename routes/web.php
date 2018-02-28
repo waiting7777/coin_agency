@@ -27,6 +27,6 @@ Route::get('/test', function() {
 
 Route::post('/webhook', function(Request $request){
     // Log::channel('slack')->info($request->all());
-    $challenge = $request->input('challenge');
-    return $challenge;
+    $challenge = $request->input('challenge');    
+    return response($challenge, 200)->header('Content-Type', 'text/plain');
 });

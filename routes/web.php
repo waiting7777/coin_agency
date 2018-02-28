@@ -28,7 +28,7 @@ Route::get('/test', function() {
 Route::post('/webhook', function(Request $request){
     $data = $request->all();
     if(strpos($data['event']['text'], '<@U9FAL208Y>') !== false){
-        $coin_data = json_decode(Curl::to('https://api.coinmarketcap.com/v1/ticker/?limit=1')->get());
+        $coin_data = json_decode(Curl::to('https://api.coinmarketcap.com/v1/ticker/?limit=1')->get(), true);
         $coin = $coin_data[0];
         $res = array('attachments' => 
             array(
@@ -36,33 +36,33 @@ Route::post('/webhook', function(Request $request){
                     'fallback' => 'Data not avaiable',
                     'color' => '#70A800',
                     'pretext' => 'Latest price from CoinMarketCap:',
-                    'author_name' => $coin->name . ' (' . $coin->symbol . ')',
+                    'author_name' => $coin['name'] . ' (' . $coin['symbol'] . ')',
                     'author_link' => 'https://coinmarketcap.com/currencies/bitcoin/',
                     'author_icon' => 'https://files.coinmarketcap.com/static/img/coins/32x32/1.png',
                     'fields' => array(
                         array(
                             'title' => 'Rank',
-                            'value' => $coin->rank,
+                            'value' => $coin['rank'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Price',
-                            'value' => '$' . $coin->price_usd,
+                            'value' => '$' . $coin['price_usd'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Available Supply',
-                            'value' => $coin->available_supply . ' ' . $coin->name,
+                            'value' => $coin['available_supply'] . ' ' . $coin['name'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Total Supply',
-                            'value' => $coin->total_supply . ' ' . $coin->name,
+                            'value' => $coin['total_supply'] . ' ' . $coin['name'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Max Supply',
-                            'value' => $coin->max_supply . ' ' . $coin->name,
+                            'value' => $coin['max_supply'] . ' ' . $coin['name'],
                             'short'=> true
                         ),
                         array(
@@ -72,26 +72,26 @@ Route::post('/webhook', function(Request $request){
                         ),
                         array(
                             'title' => 'Market Cap',
-                            'value' => '$' . $coin->market_cap_usd,
+                            'value' => '$' . $coin['market_cap_usd'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Percent Change (1h)',
-                            'value' => $coin->percent_change_1h . '%',
+                            'value' => $coin['percent_change_1h'] . '%',
                             'short'=> true
                         ),
                         array(
                             'title' => 'Percent Change (24h)',
-                            'value' => $coin->percent_change_24h . '%',
+                            'value' => $coin['percent_change_24h'] . '%',
                             'short'=> true
                         ),
                         array(
                             'title' => 'Percent Change (7d)',
-                            'value' => $coin->percent_change_7d . '%',
+                            'value' => $coin['percent_change_7d'] . '%',
                             'short'=> true
                         )
                     ),
-                    'ts' => $coin->last_updated
+                    'ts' => $coin['last_updated']
                 )
             )
         );

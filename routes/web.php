@@ -12,6 +12,7 @@
 */
 
 use Ixudra\Curl\Facades\Curl;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,4 +23,8 @@ Route::get('/test', function() {
     $user = ['name' => 'John', 'age' => 65];
     Log::channel('slack')->info('User: ' . print_r($user, true));
     return $response;
+});
+
+Route::post('/webhook', function(Request $request){
+    Log::channel('slack')->info($request->all());
 });

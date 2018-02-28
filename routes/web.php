@@ -27,7 +27,8 @@ Route::get('/test', function() {
 
 Route::post('/webhook', function(Request $request){
     $data = $request->all();
-    if(strpos($data['event']['text'], '<@U9FAL208Y>') !== false){
+    Log::info(print_r($data, true));
+    if(strpos($data['event']['text'], '<@U9FAL208Y>') !== false && strpos($data['event']['text'], 'BTC' !== false)){
         $coin_data = json_decode(Curl::to('https://api.coinmarketcap.com/v1/ticker/?limit=1')->get(), true);
         $coin = $coin_data[0];
         $res = array('attachments' => 

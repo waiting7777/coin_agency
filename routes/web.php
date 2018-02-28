@@ -53,22 +53,22 @@ Route::post('/webhook', function(Request $request){
                         ),
                         array(
                             'title' => 'Available Supply',
-                            'value' => $coin['available_supply'] . ' ' . $coin['name'],
+                            'value' => number_format($coin['available_supply']) . ' ' . $coin['name'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Total Supply',
-                            'value' => $coin['total_supply'] . ' ' . $coin['name'],
+                            'value' => number_format($coin['total_supply']) . ' ' . $coin['name'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Max Supply',
-                            'value' => $coin['max_supply'] . ' ' . $coin['name'],
+                            'value' => number_format($coin['max_supply']) . ' ' . $coin['name'],
                             'short'=> true
                         ),
                         array(
                             'title' => 'Volume (24h)',
-                            'value' => '$' . $coin['24h_volume_usd'],
+                            'value' => '$' . number_format($coin['24h_volume_usd']),
                             'short'=> true
                         ),
                         array(
